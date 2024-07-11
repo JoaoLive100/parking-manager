@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: MyString
+  amount: 1
+  paid_at: 2024-06-28 16:56:08
+
+two:
+  status: MyString
+  amount: 1
+  paid_at: 2024-06-28 16:56:08

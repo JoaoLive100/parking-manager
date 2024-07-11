@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  plate: MyString
+  checkin: 2024-06-28 16:39:21
+  checkout: 2024-06-28 16:39:21
+  status: MyString
+
+two:
+  id: 1
+  plate: MyString
+  checkin: 2024-06-28 16:39:21
+  checkout: 2024-06-28 16:39:21
+  status: MyString

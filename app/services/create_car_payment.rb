@@ -1,4 +1,4 @@
-class CreateCarPayment
+class AlterCarPayment
     def initialize(car)
         @car = car
         @car_id = car.id

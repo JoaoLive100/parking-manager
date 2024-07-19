@@ -1,8 +1,9 @@
 class CarsController < ApplicationController
 
     #GET /cars/all (all cars)
+    #GET /cars/all?page=2
     def all
-        @cars = Car.all
+        @cars = Car.page(params[:page]).per(50)
         render json: {status: 'SUCCESS', message: 'Loaded all cars', data: @cars}, status: :ok
     end
 

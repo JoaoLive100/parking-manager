@@ -4,7 +4,7 @@ class CreatePayments < ActiveRecord::Migration[7.1]
       t.string :status, default: 'pending'
       t.integer :amount
       t.datetime :paid_at
-      t.references :car, null: false, foreign_key: true
+      t.references :car, null: false, foreign_key: { on_delete: :cascade }
 
       t.timestamps
     end

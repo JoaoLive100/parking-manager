@@ -26,6 +26,9 @@ gem "rspec-rails"
 # Factory bot
 gem "factory_bot_rails"
 
+# Pagination gem
+gem "kaminari"
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 

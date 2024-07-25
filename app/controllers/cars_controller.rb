@@ -1,8 +1,9 @@
 class CarsController < ApplicationController
 
     #GET /cars/all (all cars)
+    #GET /cars/all?page=2
     def all
-        @cars = Car.all
+        @cars = Car.page(params[:page]).per(10)
         render json: {status: 'SUCCESS', message: 'Loaded all cars', data: @cars}, status: :ok
     end
 
@@ -29,7 +30,7 @@ class CarsController < ApplicationController
         @car = Car.new(car_params)
         if @car.save
             
-            @payment = Payment.new(@car)
+            @payment = CreateCarPayment.new(@car)
             @payment.perform
 
             render json: {status: 'SUCCESS', message: 'Saved car', data: @car}, status: :ok
@@ -41,7 +42,7 @@ class CarsController < ApplicationController
     #PUT /cars/:id (update a car)
     def update
         @car = Car.find(params[:id])
-        if @car.update_attributes(car_params)
+        if @car.update(car_params)
             render json: {status: 'SUCCESS', message: 'Updated car', data: @car}, status: :ok
         else
             render json: {status: 'ERROR', message: 'Car not updated', data: @car.errors}, status: :unprocessable_entity
@@ -52,14 +53,17 @@ class CarsController < ApplicationController
     def destroy
         ActiveRecord::Base.transaction do
             @car = Car.find(params[:id])
-            @car.destroy
-            render json: {status: 'SUCCESS', message: 'Deleted car', data: @car}, status: :ok
+            if @car.destroy
+                render json: {status: 'SUCCESS', message: 'Deleted car', data: @car}, status: :ok
+            else
+                render json: {status: 'ERROR', message: 'Car not deleted', data: @car.errors}, status: :unprocessable_entity
+            end
         end
     end
 
     private
 
     def car_params
-        params.permit(:plate, :checkin, :checkout, :status)
+        params.require(:car).permit(:plate, :checkin, :checkout, :status)
     end
 end

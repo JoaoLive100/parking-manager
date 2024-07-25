@@ -7,3 +7,15 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+50.times do
+    Car.create({
+        plate: Faker::Vehicle.license_plate,
+        checkin: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now),
+        checkout: nil,
+        status: 'parked'
+    })
+
+    @payment = CreateCarPayment.new(Car.last)
+    @payment.perform
+end

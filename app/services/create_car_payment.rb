@@ -16,9 +16,6 @@ class CreateCarPayment
             car_id: @car_id,
             amount: 100
         })
-        unless payment.save
-            raise StandardError, 'Payment not saved'
-        end
     end
 
     def validate!

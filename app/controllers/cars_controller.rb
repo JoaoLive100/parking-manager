@@ -3,7 +3,7 @@ class CarsController < ApplicationController
     #GET /cars/all (all cars)
     #GET /cars/all?page=2
     def all
-        @cars = Car.page(params[:page]).per(50)
+        @cars = Car.page(params[:page]).per(10)
         render json: {status: 'SUCCESS', message: 'Loaded all cars', data: @cars}, status: :ok
     end
 
@@ -53,12 +53,11 @@ class CarsController < ApplicationController
     def destroy
         ActiveRecord::Base.transaction do
             @car = Car.find(params[:id])
-
-            @payment = DeleteCarPayment.new(@car)
-            @payment.perform
-            
-            @car.destroy
-            render json: {status: 'SUCCESS', message: 'Deleted car', data: @car}, status: :ok
+            if @car.destroy
+                render json: {status: 'SUCCESS', message: 'Deleted car', data: @car}, status: :ok
+            else
+                render json: {status: 'ERROR', message: 'Car not deleted', data: @car.errors}, status: :unprocessable_entity
+            end
         end
     end
 

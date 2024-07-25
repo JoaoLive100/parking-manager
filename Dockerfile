@@ -5,7 +5,8 @@ FROM ruby:3.3.0
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client build-essential libpq-dev
 
 # Set an environment variable where the Rails app is installed to inside of Docker image
-WORKDIR /parking-manager
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
 # Set argument for port
 ARG PORT=3000

@@ -29,6 +29,12 @@ gem "factory_bot_rails"
 # Pagination gem
 gem "kaminari"
 
+# Cors gem
+gem "rack-cors"
+
+# Binding pry
+# gem "pry-rails"
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 

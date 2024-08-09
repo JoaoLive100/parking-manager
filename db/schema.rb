@@ -33,5 +33,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_28_195608) do
     t.index ["car_id"], name: "index_payments_on_car_id"
   end
 
-  add_foreign_key "payments", "cars"
+  add_foreign_key "payments", "cars", on_delete: :cascade
 end

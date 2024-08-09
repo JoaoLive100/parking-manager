@@ -1,9 +1,8 @@
 class PaymentsController < ApplicationController
 
     #GET /payments/all (all payments)
-    #GET /payments/all?page=2
     def all
-        @payments = Payment.page(params[:page]).per(50)
+        @payments = Payment.all
         render json: {status: 'SUCCESS', message: 'Loaded all payments', data: @payments}, status: :ok
     end
 
